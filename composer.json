@@ -1,0 +1,19 @@
+{
+    "name": "bugcat/lunar",
+    "description": "Lunar Calendar 农历 阴历 夏历 旧历 太阴历",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "bug",
+            "email": "i@bug.cat"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Bugcat\\Lunar\\": "src/"
+        }
+    }
+}
