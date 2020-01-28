@@ -83,7 +83,7 @@ trait GetInfo
         //天
         $h_stamp = $this->__dayInfo($d_stamp);
         
-        //天
+        //时间
         $t_stamp = $this->__timeInfo($h_stamp);
         
     }
@@ -132,7 +132,7 @@ trait GetInfo
         $month_day = 0;
         for ( $i = 1; $i <= 12; $i++ ) {
             $day = $m_days[$i];
-            $_stamp = $d_stamp - $day * 3600 * 24;
+            $_stamp = $d_stamp - $day * 86400;
             if ( $_stamp >= 0 ) {
                 //如果剩餘時間大於零
                 $d_stamp = $_stamp;
@@ -142,9 +142,17 @@ trait GetInfo
                 break;
             }
         }
-        if ( $m_days[0] > 0 ) {
-            $leap = 1;
-            $month_day -= $m_days[0];
+		//判断是否润月
+        if ( $month_day > 30 ) {
+			$day_nums = ceil($d_stamp / 86400);
+			if ( $day_nums <= $m_days[0] ) {
+				$leap = 0; //平月
+				$month_day = $m_days[0];
+			} else {
+				$leap = 1; //润月
+				$month_day -= $m_days[0];
+				$d_stamp -= $m_days[0] * 86400;
+			}
         }
         
         $this->info['L'] = $leap; //是否爲潤月
@@ -167,7 +175,7 @@ trait GetInfo
         $h_stamp = $d_stamp;
         $day = 0;
         for ( $i = 1; $i <= 30; $i++ ) {
-            $_stamp = $d_stamp - $i * 3600 * 24;
+            $_stamp = $d_stamp - $i * 86400;
             if ( $_stamp >= 0 ) {
                 //如果剩餘時間大於零
                 $h_stamp = $_stamp;
