@@ -142,17 +142,17 @@ trait GetInfo
                 break;
             }
         }
-		//判断是否润月
+        //判断是否润月
         if ( $month_day > 30 ) {
-			$day_nums = ceil($d_stamp / 86400);
-			if ( $day_nums <= $m_days[0] ) {
-				$leap = 0; //平月
-				$month_day = $m_days[0];
-			} else {
-				$leap = 1; //润月
-				$month_day -= $m_days[0];
-				$d_stamp -= $m_days[0] * 86400;
-			}
+            $day_nums = ceil($d_stamp / 86400);
+            if ( $day_nums <= $m_days[0] ) {
+                $leap = 0; //平月
+                $month_day = $m_days[0];
+            } else {
+                $leap = 1; //润月
+                $month_day -= $m_days[0];
+                $d_stamp -= $m_days[0] * 86400;
+            }
         }
         
         $this->info['L'] = $leap; //是否爲潤月
